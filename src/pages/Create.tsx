@@ -13,6 +13,7 @@ import {
 import CreateTimePlan from '@/components/CreateStudy/CreateTimePlan';
 import DayButton from '@/components/Day/DayButton';
 import Input from '@/components/Input';
+import Layout from '@/components/Layout';
 import TextArea from '@/components/TextArea';
 
 const InputWrapper = styled(ItemsCenter)`
@@ -62,74 +63,79 @@ const Create = () => {
   };
 
   return (
-    <PageContainer>
-      <FlexCol>
-        <ItemsCenter>
-          <PageMenuTitle>스터디 이름</PageMenuTitle>
-          <InputWrapper>
-            <Input
-              type='text'
-              placeholder='스터디이름을 입력하세요'
-            />
-          </InputWrapper>
-        </ItemsCenter>
-        <Flex>
-          <PageMenuTitle>스터디 목적</PageMenuTitle>
-          <InputWrapper>
-            <TextArea
-              placeholder='스터디이름을 입력하세요'
-              cols={30}
-              rows={5}
-            />
-          </InputWrapper>
-        </Flex>
+    <Layout
+      title='스터디 생성'
+      canGoBack
+    >
+      <PageContainer>
         <FlexCol>
-          <PageMenuTitle>스터디 일정</PageMenuTitle>
-          <SpaceBetween>
-            {/* <JustifyCenter> */}
-            {['월', '화', '수', '목', '금', '토', '일'].map((day) => (
-              <DayButton
-                key={day}
-                content={day}
-                isFilled={
-                  day === isDayClicked ||
-                  plannedDays.filter((plannedDay) => plannedDay.day === day).length > 0
-                }
-                onClick={() => {
-                  setIsDayClicked((prev) => {
-                    if (prev === day) return '';
-                    return day;
-                  });
-                }}
+          <ItemsCenter>
+            <PageMenuTitle>스터디 이름</PageMenuTitle>
+            <InputWrapper>
+              <Input
+                type='text'
+                placeholder='스터디이름을 입력하세요'
               />
-            ))}
-            {/* </JustifyCenter> */}
-          </SpaceBetween>
+            </InputWrapper>
+          </ItemsCenter>
+          <Flex>
+            <PageMenuTitle>스터디 목적</PageMenuTitle>
+            <InputWrapper>
+              <TextArea
+                placeholder='스터디이름을 입력하세요'
+                cols={30}
+                rows={5}
+              />
+            </InputWrapper>
+          </Flex>
+          <FlexCol>
+            <PageMenuTitle>스터디 일정</PageMenuTitle>
+            <SpaceBetween>
+              {/* <JustifyCenter> */}
+              {['월', '화', '수', '목', '금', '토', '일'].map((day) => (
+                <DayButton
+                  key={day}
+                  content={day}
+                  isFilled={
+                    day === isDayClicked ||
+                    plannedDays.filter((plannedDay) => plannedDay.day === day).length > 0
+                  }
+                  onClick={() => {
+                    setIsDayClicked((prev) => {
+                      if (prev === day) return '';
+                      return day;
+                    });
+                  }}
+                />
+              ))}
+              {/* </JustifyCenter> */}
+            </SpaceBetween>
+          </FlexCol>
+          {isDayClicked && (
+            <CreateTimePlan
+              day={isDayClicked}
+              onSave={onSaveTime}
+              onCancel={onCancelTime}
+            />
+          )}
+          <FlexCol>
+            <PageMenuTitle>저장된 일정</PageMenuTitle>
+            {plannedDays.length > 0 &&
+              plannedDays.map((plan, idx) => (
+                <ItemsCenter key={plan.day}>
+                  <p>{`${plan.day} ${plan.time.startTime} ~ ${plan.time.endTime}`}</p>
+                  <button
+                    type='button'
+                    onClick={() => onClickClearPlannedDay(idx)}
+                  >
+                    clear
+                  </button>
+                </ItemsCenter>
+              ))}
+          </FlexCol>
         </FlexCol>
-        {isDayClicked && (
-          <CreateTimePlan
-            day={isDayClicked}
-            onSave={onSaveTime}
-            onCancel={onCancelTime}
-          />
-        )}
-        <FlexCol>
-          <PageMenuTitle>저장된 일정</PageMenuTitle>
-          {plannedDays.length > 0 &&
-            plannedDays.map((plan, idx) => (
-              <ItemsCenter key={plan.day}>
-                <p>{`${plan.day} ${plan.time.startTime} ~ ${plan.time.endTime}`}</p>
-                <button
-                  type='button'
-                  onClick={() => onClickClearPlannedDay(idx)}
-                >
-                  clear
-                </button>
-              </ItemsCenter>
-            ))}
-        </FlexCol>
-      </FlexCol>
-    </PageContainer>
+      </PageContainer>
+    </Layout>
   );
 };
 
