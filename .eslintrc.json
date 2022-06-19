@@ -22,6 +22,7 @@
     "no-empty-pattern": "off",
     "quotes": ["error", "single"],
     "jsx-quotes": ["error", "prefer-single"],
+    "operator-linebreak": "off",
     "prettier/prettier": ["error", { "singleQuote": true }],
     "import/order": [
       "error",
