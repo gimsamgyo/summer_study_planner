@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
+import Button from '../Button';
+
 import { FlexCol, Flex, ItemsCenter } from '@/CommonStyles';
 
 const StudyTimeContainer = styled(FlexCol)`
@@ -95,18 +97,15 @@ const CreateTimePlan = ({ day, onSave, onCancel }: ICreateTimePlan) => {
         </ItemsCenter>
       </FlexCol>
       <SaveButtonContainer>
-        <button
-          type='button'
+        <Button
+          content='취소'
           onClick={onClickCancel}
-        >
-          취소
-        </button>
-        <button
-          type='button'
+        />
+        <Button
+          primary
+          content='확인'
           onClick={onClickSave}
-        >
-          확인
-        </button>
+        />
       </SaveButtonContainer>
     </StudyTimeContainer>
   );

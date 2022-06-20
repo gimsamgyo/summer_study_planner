@@ -8,8 +8,10 @@ import {
   FlexCol,
   PageContainer,
   PageMenuTitle,
+  JustifyCenter,
 } from '../CommonStyles';
 
+import Button from '@/components/Button';
 import CreateTimePlan from '@/components/CreateStudy/CreateTimePlan';
 import DayButton from '@/components/Day/DayButton';
 import Input from '@/components/Input';
@@ -124,16 +126,24 @@ const Create = () => {
               plannedDays.map((plan, idx) => (
                 <ItemsCenter key={plan.day}>
                   <p>{`${plan.day} ${plan.time.startTime} ~ ${plan.time.endTime}`}</p>
-                  <button
-                    type='button'
+                  <Button
+                    primary
+                    content='삭제'
                     onClick={() => onClickClearPlannedDay(idx)}
-                  >
-                    clear
-                  </button>
+                  />
                 </ItemsCenter>
               ))}
           </FlexCol>
         </FlexCol>
+        <JustifyCenter>
+          <Button
+            primary
+            content='저장'
+            onClick={() => {
+              console.log('저장');
+            }}
+          />
+        </JustifyCenter>
       </PageContainer>
     </Layout>
   );
