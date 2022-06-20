@@ -11,6 +11,8 @@ interface LayoutProps {
 
 const Children = styled.div`
   padding-top: 3rem;
+  width: 100vw;
+  height: 100vh;
 `;
 const BackButton = styled.button`
   position: absolute;
@@ -42,14 +44,14 @@ const Layout = ({ title, canGoBack, children }: LayoutProps) => {
     navigate(-1);
   };
   return (
-    <div>
+    <>
       <Header>
         {canGoBack && <BackButton onClick={onClickGoBack}>&larr;</BackButton>}
         {title && <span>{title}</span>}
       </Header>
       <Children>{children}</Children>
       {/* 필요 시 bottomNav 추가 가능 */}
-    </div>
+    </>
   );
 };
 export default Layout;

@@ -21,6 +21,10 @@ export const FlexCol = styled(Flex)`
 `;
 export const PageContainer = styled.div`
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 `;
 export const PageMenuTitle = styled.h2`
   white-space: nowrap;
