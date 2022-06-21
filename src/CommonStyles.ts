@@ -25,6 +25,7 @@ export const PageContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  width: 100%;
 `;
 export const PageMenuTitle = styled.h2`
   white-space: nowrap;
