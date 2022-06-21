@@ -55,10 +55,6 @@ const CreateTimePlan = ({ day, onSave, onCancel }: ICreateTimePlan) => {
     startTime: '',
     endTime: '',
   });
-
-  const onClickCancel = () => {
-    onCancel();
-  };
   const onClickSave = () => {
     onSave(day, time);
   };
@@ -99,7 +95,7 @@ const CreateTimePlan = ({ day, onSave, onCancel }: ICreateTimePlan) => {
       <SaveButtonContainer>
         <Button
           content='취소'
-          onClick={onClickCancel}
+          onClick={onCancel}
         />
         <Button
           primary
