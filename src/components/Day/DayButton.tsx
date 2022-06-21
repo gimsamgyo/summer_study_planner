@@ -13,15 +13,15 @@ const DayButtonStyle = styled.button<{ isFilled: boolean }>`
 
 const DayButton = ({
   content,
-  onClick,
+  setDayChecked,
   isFilled,
 }: {
   content: string;
-  onClick: () => void;
+  setDayChecked: () => void;
   isFilled: boolean;
 }) => (
   <DayButtonStyle
-    onClick={onClick}
+    onClick={setDayChecked}
     isFilled={isFilled}
   >
     {content}

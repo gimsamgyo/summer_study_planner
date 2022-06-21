@@ -102,7 +102,7 @@ const Create = () => {
                     day === isDayClicked ||
                     plannedDays.filter((plannedDay) => plannedDay.day === day).length > 0
                   }
-                  onClick={() => {
+                  setDayChecked={() => {
                     setIsDayClicked((prev) => {
                       if (prev === day) return '';
                       return day;
