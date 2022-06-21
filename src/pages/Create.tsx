@@ -28,11 +28,11 @@ type PlannedDayType = {
   time: { startTime: string; endTime: string };
 };
 const Create = () => {
-  const [plannedDays, setPlannedDay] = useState<PlannedDayType[]>([] as PlannedDayType[]);
+  const [plannedDays, setPlannedDays] = useState<PlannedDayType[]>([] as PlannedDayType[]);
   const [isDayClicked, setIsDayClicked] = useState('');
 
   const onSaveTime = (day: string, time: { startTime: string; endTime: string }) => {
-    setPlannedDay((currentPlannedDays) => {
+    setPlannedDays((currentPlannedDays) => {
       const currentDayIndex = currentPlannedDays.findIndex(
         (plannedDay) => plannedDay.day === isDayClicked,
       );
@@ -58,7 +58,7 @@ const Create = () => {
     setIsDayClicked('');
   };
   const onClickClearPlannedDay = (idx: number) => {
-    setPlannedDay((currentPlannedDays) => {
+    setPlannedDays((currentPlannedDays) => {
       const newPlannedDays = currentPlannedDays.splice(idx, 1);
       return newPlannedDays;
     });
