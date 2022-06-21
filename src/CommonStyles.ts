@@ -30,3 +30,15 @@ export const PageContainer = styled.div`
 export const PageMenuTitle = styled.h2`
   white-space: nowrap;
 `;
+
+export const Label = styled.label`
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #666;
+  display: block;
+`;
+export const ErrorMessage = styled.p`
+  color: red;
+  padding: 0.5rem 0;
+`;

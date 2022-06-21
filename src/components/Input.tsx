@@ -1,4 +1,7 @@
+import type { UseFormRegisterReturn } from 'react-hook-form';
 import styled from 'styled-components';
+
+import { Label, ErrorMessage } from '@/CommonStyles';
 
 const InputStyle = styled.input`
   width: 100%;
@@ -10,10 +13,37 @@ const InputStyle = styled.input`
     outline: 1px solid coral;
   }
 `;
-const Input = ({ ...rest }) => (
-  <InputStyle
-    type='text'
-    {...rest}
-  />
+
+interface InputProps {
+  type: string;
+  placeholder?: string;
+  register?: UseFormRegisterReturn;
+  errorMessage?: string;
+  label?: string;
+  name?: string;
+  required: boolean;
+}
+const Input = ({
+  type,
+  placeholder,
+  required,
+  register,
+  errorMessage,
+  label,
+  name,
+}: InputProps) => (
+  <div>
+    {name && label && <Label htmlFor={name}>{label}</Label>}
+    <div>
+      <InputStyle
+        id={name}
+        type={type}
+        placeholder={placeholder}
+        required={required}
+        {...register}
+      />
+      {!!errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+    </div>
+  </div>
 );
 export default Input;

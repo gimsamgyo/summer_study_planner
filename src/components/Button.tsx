@@ -5,7 +5,7 @@ interface IButtonStyle {
 }
 
 interface IButton extends IButtonStyle {
-  onClick: () => void;
+  onClick?: () => void;
   content: string;
 }
 
