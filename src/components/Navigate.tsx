@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { BiMenu, BiMessageRounded, BiUser, BiYen } from 'react-icons/bi';
-import { Link, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const NavigateContainer = styled.ul`
@@ -33,38 +33,41 @@ const Navigate = () => {
   const navigate = useNavigate();
   const [category, setCategory] = useState<CategoryType>('list');
 
-  const handleNavigatePage = (category: CategoryType) => {
-    setCategory(category);
-    navigate(CATEGORY_PATH_MAPS[category]);
+  const handleNavigatePage = (selecterdCategory: CategoryType) => {
+    setCategory(selecterdCategory);
+    navigate(CATEGORY_PATH_MAPS[selecterdCategory]);
   };
 
   return (
-    <NavigateContainer>
-      <Li
-        isSelected={category === 'list'}
-        onClick={() => handleNavigatePage('list')}
-      >
-        <BiMenu />
-      </Li>
-      <Li
-        isSelected={category === 'message'}
-        onClick={() => handleNavigatePage('message')}
-      >
-        <BiMessageRounded />
-      </Li>
-      <Li
-        isSelected={category === 'yen'}
-        onClick={() => handleNavigatePage('yen')}
-      >
-        <BiYen />
-      </Li>
-      <Li
-        isSelected={category === 'user'}
-        onClick={() => handleNavigatePage('user')}
-      >
-        <BiUser />
-      </Li>
-    </NavigateContainer>
+    <>
+      <Outlet />
+      <NavigateContainer>
+        <Li
+          isSelected={category === 'list'}
+          onClick={() => handleNavigatePage('list')}
+        >
+          <BiMenu />
+        </Li>
+        <Li
+          isSelected={category === 'message'}
+          onClick={() => handleNavigatePage('message')}
+        >
+          <BiMessageRounded />
+        </Li>
+        <Li
+          isSelected={category === 'yen'}
+          onClick={() => handleNavigatePage('yen')}
+        >
+          <BiYen />
+        </Li>
+        <Li
+          isSelected={category === 'user'}
+          onClick={() => handleNavigatePage('user')}
+        >
+          <BiUser />
+        </Li>
+      </NavigateContainer>
+    </>
   );
 };
 
