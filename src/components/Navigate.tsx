@@ -4,15 +4,15 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const NavigateContainer = styled.ul`
-  height: 6vh;
+  height: 3rem;
   display: flex;
   justify-content: space-between;
   border-top: 0.1px solid grey;
   align-items: center;
   padding: 0px 2rem;
   svg {
-    width: 1.2rem;
-    height: 1.2rem;
+    width: 1.6rem;
+    height: 1.6rem;
   }
 `;
 
