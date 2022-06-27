@@ -20,12 +20,12 @@ const Li = styled.li<{ isSelected: boolean }>`
   color: ${({ isSelected }) => (isSelected ? 'coral' : 'grey')};
 `;
 
-type CategoryType = 'list' | 'message' | 'yen' | 'user';
+type CategoryType = 'list' | 'message' | 'penalty' | 'user';
 
 const CATEGORY_PATH_MAPS = {
   list: '/',
   message: '/message',
-  yen: '/yen',
+  penalty: '/penalty',
   user: '/user',
 } as const;
 
@@ -55,8 +55,8 @@ const Navigate = () => {
           <BiMessageRounded />
         </Li>
         <Li
-          isSelected={category === 'yen'}
-          onClick={() => handleNavigatePage('yen')}
+          isSelected={category === 'penalty'}
+          onClick={() => handleNavigatePage('penalty')}
         >
           <BiYen />
         </Li>

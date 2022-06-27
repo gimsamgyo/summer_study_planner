@@ -1,9 +1,9 @@
 import Layout from '@/components/Layout';
 
-const Yen = () => (
+const Penalty = () => (
   <Layout title='돈내라'>
     <div />
   </Layout>
 );
 
-export default Yen;
+export default Penalty;

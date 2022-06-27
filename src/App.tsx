@@ -5,8 +5,8 @@ import GlobalStyles from './GlobalStyles';
 import Create from './pages/Create';
 import Main from './pages/Main';
 import Message from './pages/Message';
+import Penalty from './pages/Penalty';
 import User from './pages/User';
-import Yen from './pages/Yen';
 
 const App = () => (
   <>
@@ -26,8 +26,8 @@ const App = () => (
             element={<Create />}
           />
           <Route
-            path='/yen'
-            element={<Yen />}
+            path='/penalty'
+            element={<Penalty />}
           />
           <Route
             path='/message'
