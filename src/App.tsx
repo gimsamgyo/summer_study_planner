@@ -2,9 +2,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Navigate from './components/Navigate';
 import GlobalStyles from './GlobalStyles';
+import Calender from './pages/Calender';
 import Create from './pages/Create';
 import Main from './pages/Main';
-import Message from './pages/Message';
 import Penalty from './pages/Penalty';
 import User from './pages/User';
 
@@ -30,8 +30,8 @@ const App = () => (
             element={<Penalty />}
           />
           <Route
-            path='/message'
-            element={<Message />}
+            path='/calender'
+            element={<Calender />}
           />
           <Route
             path='/user'

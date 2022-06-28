@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BiMenu, BiMessageRounded, BiUser, BiYen } from 'react-icons/bi';
+import { BiCalendar, BiMenu, BiUser, BiYen } from 'react-icons/bi';
 import { Outlet, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -20,18 +20,27 @@ const Li = styled.li<{ isSelected: boolean }>`
   color: ${({ isSelected }) => (isSelected ? 'coral' : 'grey')};
 `;
 
-type CategoryType = 'list' | 'message' | 'penalty' | 'user';
+type CategoryType = 'list' | 'calender' | 'penalty' | 'user';
 
 const CATEGORY_PATH_MAPS = {
   list: '/',
-  message: '/message',
+  calender: '/calender',
   penalty: '/penalty',
   user: '/user',
 } as const;
 
+const REVERT_CATEGORY_PATH_MAPS = {
+  '/': 'list',
+  '/calender': 'calender',
+  '/penalty': 'penalty',
+  '/user': 'user',
+} as const;
+
 const Navigate = () => {
   const navigate = useNavigate();
-  const [category, setCategory] = useState<CategoryType>('list');
+  const [category, setCategory] = useState<CategoryType>(
+    REVERT_CATEGORY_PATH_MAPS[window.location.pathname as keyof typeof REVERT_CATEGORY_PATH_MAPS],
+  );
 
   const handleNavigatePage = (selecterdCategory: CategoryType) => {
     setCategory(selecterdCategory);
@@ -49,10 +58,10 @@ const Navigate = () => {
           <BiMenu />
         </Li>
         <Li
-          isSelected={category === 'message'}
-          onClick={() => handleNavigatePage('message')}
+          isSelected={category === 'calender'}
+          onClick={() => handleNavigatePage('calender')}
         >
-          <BiMessageRounded />
+          <BiCalendar />
         </Li>
         <Li
           isSelected={category === 'penalty'}
