@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { BiChevronLeft } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -12,9 +13,9 @@ interface LayoutProps {
 const Children = styled.div`
   padding-top: 3rem;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 3rem);
 `;
-const BackButton = styled.button`
+const BackButtonWrapper = styled.button`
   position: absolute;
   left: 1rem;
   background: white;
@@ -46,7 +47,11 @@ const Layout = ({ title, canGoBack, children }: LayoutProps) => {
   return (
     <>
       <Header>
-        {canGoBack && <BackButton onClick={onClickGoBack}>&larr;</BackButton>}
+        {canGoBack && (
+          <BackButtonWrapper onClick={onClickGoBack}>
+            <BiChevronLeft />
+          </BackButtonWrapper>
+        )}
         {title && <span>{title}</span>}
       </Header>
       <Children>{children}</Children>

@@ -1,27 +1,46 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+import Navigate from './components/Navigate';
 import GlobalStyles from './GlobalStyles';
 import Create from './pages/Create';
 import Main from './pages/Main';
+import Message from './pages/Message';
+import Penalty from './pages/Penalty';
+import User from './pages/User';
 
-function App() {
-  return (
-    <>
-      <GlobalStyles />
-      <BrowserRouter>
-        <Routes>
+const App = () => (
+  <>
+    <GlobalStyles />
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path='/'
+          element={<Navigate />}
+        >
           <Route
-            path='/'
+            index
             element={<Main />}
           />
           <Route
             path='/create'
             element={<Create />}
           />
-        </Routes>
-      </BrowserRouter>
-    </>
-  );
-}
+          <Route
+            path='/penalty'
+            element={<Penalty />}
+          />
+          <Route
+            path='/message'
+            element={<Message />}
+          />
+          <Route
+            path='/user'
+            element={<User />}
+          />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  </>
+);
 
 export default App;
