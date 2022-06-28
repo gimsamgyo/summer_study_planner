@@ -1,13 +1,7 @@
+import React from 'react';
 import styled from 'styled-components';
 
-interface IButtonStyle {
-  primary?: boolean;
-}
-
-interface IButton extends IButtonStyle {
-  onClick?: () => void;
-  content: string;
-}
+import { IButtonStyle, IButton } from '@/types/Button';
 
 const ButtonStyle = styled.button<IButtonStyle>`
   cursor: pointer;
