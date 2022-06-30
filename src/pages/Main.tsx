@@ -33,10 +33,11 @@ const Main = () => {
     e.stopPropagation();
     setFloatingMenuOpen(true);
   };
+  const closeFloatingMenu = () => setFloatingMenuOpen(false);
 
   return (
     <Layout title='스터디 목록'>
-      <PageContainer onClick={() => setFloatingMenuOpen(false)}>
+      <PageContainer onClick={closeFloatingMenu}>
         <Contents />
         <FloatingOpenMenuButton
           content='M'
