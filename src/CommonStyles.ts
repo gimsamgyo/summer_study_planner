@@ -20,7 +20,6 @@ export const FlexCol = styled(Flex)`
   flex-direction: column;
 `;
 export const PageContainer = styled.div`
-  padding: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

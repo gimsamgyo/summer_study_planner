@@ -8,14 +8,30 @@ import FloatingButton from '@/components/FloatingButton';
 import FloatingOpenMenuButton from '@/components/FloatingButton/FloatingOpenMenuButton';
 import Layout from '@/components/Layout';
 
-const Contents = styled.div``;
+const Contents = styled.div`
+  overflow-y: scroll;
+  padding: 0.5rem;
+  height: 100%;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    width: 6px;
+    background: #ccc;
+    border-radius: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background: none;
+  }
+`;
 
 const FloatMenus = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 1.4rem;
-  position: absolute;
+  position: fixed;
   bottom: 10rem;
   right: 2rem;
   width: 3.5rem;
@@ -29,10 +45,11 @@ const Main = () => {
   const [floatingMenuOpen, setFloatingMenuOpen] = useState(false);
 
   const goCreatePage = () => navigate('/create');
-  const openFloatingMenu = (e: SyntheticEvent<HTMLButtonElement>) => {
+  const toggleFloatingMenu = (e: SyntheticEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    setFloatingMenuOpen(true);
+    setFloatingMenuOpen((prevState) => !prevState);
   };
+
   const closeFloatingMenu = () => setFloatingMenuOpen(false);
 
   return (
@@ -42,7 +59,7 @@ const Main = () => {
         <FloatingOpenMenuButton
           content='M'
           primary
-          onClick={openFloatingMenu}
+          onClick={toggleFloatingMenu}
         />
         {floatingMenuOpen && (
           <FloatMenus onClick={(e) => e.stopPropagation()}>

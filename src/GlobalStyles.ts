@@ -10,5 +10,13 @@ const GlobalStyles = createGlobalStyle`
   *{
     box-sizing:border-box;
   }
+  #root{
+    width:100vw;
+    height:100vh;
+  }
+  body{
+    overflow:hidden;
+    touch-action:none;
+  }
 `;
 export default GlobalStyles;
