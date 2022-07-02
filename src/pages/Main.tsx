@@ -9,8 +9,21 @@ import FloatingOpenMenuButton from '@/components/FloatingButton/FloatingOpenMenu
 import Layout from '@/components/Layout';
 
 const Contents = styled.div`
-  overflow: scroll;
+  overflow-y: scroll;
   padding: 0.5rem;
+  height: 100%;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    width: 6px;
+    background: #ccc;
+    border-radius: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background: none;
+  }
 `;
 
 const FloatMenus = styled.div`
