@@ -36,7 +36,7 @@ const Header = styled.div`
   font-size: 1.2rem;
   font-weight: 600;
   color: #222;
-  border-bottom: 1px solid #bbb;
+  border-bottom: 1px solid #eee;
   padding: 0 1rem;
 `;
 const Layout = ({ title, canGoBack, children }: LayoutProps) => {
