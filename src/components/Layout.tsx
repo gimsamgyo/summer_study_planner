@@ -11,9 +11,9 @@ interface LayoutProps {
 }
 
 const Children = styled.div`
-  padding-top: 3rem;
+  padding: 3rem 0;
   width: 100vw;
-  height: calc(100vh - 3rem);
+  height: 100%;
 `;
 const BackButtonWrapper = styled.button`
   position: absolute;
