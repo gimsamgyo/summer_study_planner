@@ -26,6 +26,9 @@
         "prop": "parens-new-line"
       }
     ],
+    "implicit-arrow-linebreak": "off",
+    "indent": "off",
+    "no-param-reassign": ["error", { "props": false }],
     "react/function-component-definition": "off",
     "import/no-extraneous-dependencies": "off",
     "react/jsx-props-no-spreading": "off",
@@ -36,7 +39,7 @@
     "jsx-quotes": ["error", "prefer-single"],
     "operator-linebreak": "off",
     "object-curly-newline": "off",
-    "prettier/prettier": ["error", { "singleQuote": true }],
+    "prettier/prettier": ["error"],
     "import/order": [
       "error",
       {
