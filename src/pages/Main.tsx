@@ -11,6 +11,19 @@ import StudyListItem from '@/components/StudyListItem';
 
 const Contents = styled.div`
   padding: 0.5rem;
+  height: 100%;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    width: 6px;
+    background: #ccc;
+    border-radius: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background: none;
+  }
 `;
 
 const FloatMenus = styled.div`
