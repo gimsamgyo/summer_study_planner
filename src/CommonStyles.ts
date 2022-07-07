@@ -25,6 +25,7 @@ export const PageContainer = styled.div`
   justify-content: space-between;
   height: 100%;
   width: 100%;
+  overflow-y: scroll;
 `;
 export const PageMenuTitle = styled.h2`
   white-space: nowrap;

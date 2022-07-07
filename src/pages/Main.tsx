@@ -10,7 +10,6 @@ import Layout from '@/components/Layout';
 import StudyListItem from '@/components/StudyListItem';
 
 const Contents = styled.div`
-  overflow: scroll;
   padding: 0.5rem;
 `;
 
