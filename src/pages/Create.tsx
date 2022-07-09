@@ -1,8 +1,9 @@
+import dayjs, { Dayjs } from 'dayjs';
 import { useState } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
 import styled from 'styled-components';
 
-import { ItemsCenter, SpaceBetween, FlexCol, PageContainer, Label } from '../CommonStyles';
+import { ItemsCenter, FlexCol, PageContainer, Label } from '../CommonStyles';
 
 import Button from '@/components/Button';
 import CreateTimePlan from '@/components/CreateStudy/CreateTimePlan';
@@ -20,6 +21,7 @@ type PlannedDayType = {
   day: string;
   time: { startTime: string; endTime: string };
 };
+type StudyWeekType = 'weekly' | 'biweekly';
 
 const Form = styled.form`
   display: flex;
@@ -27,16 +29,27 @@ const Form = styled.form`
   gap: 1rem;
   padding: 1rem;
 `;
-
+const SubmitButtonWrapper = styled.div`
+  width: 100%;
+  padding: 1rem;
+  button {
+    width: 100%;
+    height: 2rem;
+  }
+`;
 const Create = () => {
   const [plannedDays, setPlannedDays] = useState<PlannedDayType[]>([] as PlannedDayType[]);
+  const [startDayOfStudy, setStartDayOfStudy] = useState<Dayjs>(dayjs(new Date()));
+  const [isWeeklyOrBiweekly, setIsWeeklyOrBiweekly] = useState<StudyWeekType>('weekly');
   const [isDayClicked, setIsDayClicked] = useState('');
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ICreateForm>();
+  } = useForm<ICreateForm>({
+    mode: 'onSubmit',
+  });
 
   const onSaveTime = (day: string, time: { startTime: string; endTime: string }) => {
     setPlannedDays((currentPlannedDays) => {
@@ -82,6 +95,20 @@ const Create = () => {
     console.log(formErrors);
   };
 
+  const changeStartDayOfStudy = (date: string) => {
+    const selectedDate = dayjs(new Date(date));
+    const today = dayjs(new Date());
+    if (today.isAfter(selectedDate)) {
+      alert('오늘보다 이전 날짜는 선택하실 수 없습니다.');
+      return;
+    }
+
+    setStartDayOfStudy(dayjs(new Date(date)));
+  };
+  const onClickWeeklyOrBiweekly = (newWeekly: StudyWeekType) => {
+    setIsWeeklyOrBiweekly(newWeekly);
+  };
+
   return (
     <Layout
       title='스터디 생성'
@@ -99,13 +126,11 @@ const Create = () => {
                 message: '이름은 3글자 이상 입력해주세요.',
               },
             })}
-            required
             name='study-name'
             label='스터디 이름'
             errorMessage={errors.studyName?.message}
           />
           <TextArea
-            required
             rows={4}
             placeholder='스터디목표를 입력하세요'
             register={register('studyGoal', {
@@ -121,7 +146,27 @@ const Create = () => {
           />
           <FlexCol>
             <Label>스터디 일정</Label>
-            <SpaceBetween>
+            <ItemsCenter>
+              <span>스터디 시작일</span>
+              <input
+                type='date'
+                value={startDayOfStudy.format('YYYY-MM-DD')}
+                onChange={(e) => changeStartDayOfStudy(e.target.value)}
+              />
+            </ItemsCenter>
+            <ItemsCenter>
+              <Button
+                content='매주'
+                onClick={() => onClickWeeklyOrBiweekly('weekly')}
+                primary={isWeeklyOrBiweekly === 'weekly'}
+              />
+              <Button
+                content='격주'
+                onClick={() => onClickWeeklyOrBiweekly('biweekly')}
+                primary={isWeeklyOrBiweekly === 'biweekly'}
+              />
+            </ItemsCenter>
+            <ItemsCenter>
               {['월', '화', '수', '목', '금', '토', '일'].map((day) => (
                 <DayButton
                   key={day}
@@ -138,7 +183,7 @@ const Create = () => {
                   }}
                 />
               ))}
-            </SpaceBetween>
+            </ItemsCenter>
           </FlexCol>
           {isDayClicked && (
             <CreateTimePlan
@@ -162,11 +207,13 @@ const Create = () => {
               ))}
           </FlexCol>
         </Form>
-        <Button
-          primary
-          content='저장'
-          onClick={handleSubmit(onSubmitValid, onSubmitInvalid)}
-        />
+        <SubmitButtonWrapper>
+          <Button
+            primary
+            content='저장'
+            onClick={handleSubmit(onSubmitValid, onSubmitInvalid)}
+          />
+        </SubmitButtonWrapper>
       </PageContainer>
     </Layout>
   );
