@@ -1,11 +1,15 @@
 import { ReactNode } from 'react';
 import { BiChevronLeft } from 'react-icons/bi';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+
+import Navigate from './Navigate';
+
+import useStack from '@/hooks/useStack';
 
 interface LayoutProps {
   title?: string;
   canGoBack?: boolean;
+  nav?: boolean;
   // hasTabBar?: boolean; // 추후 하단 바 필요시 추가
   children: ReactNode;
 }
@@ -39,10 +43,10 @@ const Header = styled.div`
   border-bottom: 1px solid #eee;
   padding: 0 1rem;
 `;
-const Layout = ({ title, canGoBack, children }: LayoutProps) => {
-  const navigate = useNavigate();
+const Layout = ({ title, canGoBack, nav, children }: LayoutProps) => {
+  const { pop } = useStack();
   const onClickGoBack = () => {
-    navigate(-1);
+    pop();
   };
   return (
     <>
@@ -55,6 +59,7 @@ const Layout = ({ title, canGoBack, children }: LayoutProps) => {
         {title && <span>{title}</span>}
       </Header>
       <Children>{children}</Children>
+      {!nav && <Navigate />}
       {/* 필요 시 bottomNav 추가 가능 */}
     </>
   );

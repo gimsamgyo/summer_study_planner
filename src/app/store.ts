@@ -11,6 +11,8 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
+import { stackSlice } from './stackSlice';
+
 import { authSlice } from '@/app/api/api';
 import baseApi from '@/app/api/baseApi';
 
@@ -18,12 +20,16 @@ const persistConfig = {
   key: 'study_planner',
   version: 1,
   storage,
-  whitelist: [authSlice.name],
+  whitelist: [authSlice.name, stackSlice.name],
 };
 
 const persistedReducer = persistReducer(
   persistConfig,
-  combineReducers({ [baseApi.reducerPath]: baseApi.reducer, [authSlice.name]: authSlice.reducer }),
+  combineReducers({
+    [baseApi.reducerPath]: baseApi.reducer,
+    [authSlice.name]: authSlice.reducer,
+    [stackSlice.name]: stackSlice.reducer,
+  }),
 );
 
 export const store = configureStore({
