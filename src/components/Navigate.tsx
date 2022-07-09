@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { BiCalendar, BiMenu, BiUser, BiYen } from 'react-icons/bi';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
+
+import useStack from '@/hooks/useStack';
 
 const NavigateContainer = styled.ul`
   position: fixed;
@@ -41,14 +43,14 @@ const REVERT_CATEGORY_PATH_MAPS = {
 } as const;
 
 const Navigate = () => {
-  const navigate = useNavigate();
+  const { path, push } = useStack();
   const [category, setCategory] = useState<CategoryType>(
-    REVERT_CATEGORY_PATH_MAPS[window.location.pathname as keyof typeof REVERT_CATEGORY_PATH_MAPS],
+    REVERT_CATEGORY_PATH_MAPS[path as keyof typeof REVERT_CATEGORY_PATH_MAPS],
   );
 
   const handleNavigatePage = (selecterdCategory: CategoryType) => {
     setCategory(selecterdCategory);
-    navigate(CATEGORY_PATH_MAPS[selecterdCategory]);
+    push(CATEGORY_PATH_MAPS[selecterdCategory]);
   };
 
   return (

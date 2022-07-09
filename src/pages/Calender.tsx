@@ -1,6 +1,5 @@
 /* eslint-disable */
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import CalendarScreen from 'react-calendar';
 import styled from 'styled-components';
@@ -8,6 +7,7 @@ import styled from 'styled-components';
 import 'react-calendar/dist/Calendar.css';
 import { studyApi } from '@/app/api/study';
 import Layout from '@/components/Layout';
+import useStack from '@/hooks/useStack';
 
 const CalenderWrapper = styled.div`
   height: 100%;
@@ -165,14 +165,14 @@ type CalenderContentType = {
 };
 
 const CalenderContent = ({ data }: { data: CalenderContentType[] }) => {
-  const navigate = useNavigate();
+  const { push } = useStack();
   const getTimeFormat = (date: Date) => `${date.getHours()}:${date.getMinutes()}`;
   return (
     <CalenderDetailContainer>
       {data.map(({ title, startTime, endTime, description }) => (
         <CalenderContentContainer
           onClick={() => {
-            navigate('/calender/' + title);
+            push('/calender/' + title);
           }}
         >
           <div>
