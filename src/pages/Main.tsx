@@ -1,5 +1,4 @@
 import { SyntheticEvent, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { PageContainer } from '@/CommonStyles';
@@ -8,6 +7,7 @@ import FloatingButton from '@/components/FloatingButton';
 import FloatingOpenMenuButton from '@/components/FloatingButton/FloatingOpenMenuButton';
 import Layout from '@/components/Layout';
 import StudyListItem from '@/components/StudyListItem';
+import useStack from '@/hooks/useStack';
 
 const Contents = styled.div`
   padding: 0.5rem;
@@ -41,10 +41,10 @@ const FloatMenus = styled.div`
 `;
 
 const Main = () => {
-  const navigate = useNavigate();
+  const { push } = useStack();
   const [floatingMenuOpen, setFloatingMenuOpen] = useState(false);
 
-  const goCreatePage = () => navigate('/create');
+  const goCreatePage = () => push('/create');
   const toggleFloatingMenu = (e: SyntheticEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     setFloatingMenuOpen((prevState) => !prevState);
