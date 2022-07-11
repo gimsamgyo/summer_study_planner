@@ -1,6 +1,6 @@
 import dayjs, { Dayjs } from 'dayjs';
 import { useState } from 'react';
-import { FieldErrors, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 
 import { ItemsCenter, FlexCol, PageContainer, Label } from '../CommonStyles';
@@ -40,7 +40,7 @@ const SubmitButtonWrapper = styled.div`
 const Create = () => {
   const [plannedDays, setPlannedDays] = useState<PlannedDayType[]>([] as PlannedDayType[]);
   const [startDayOfStudy, setStartDayOfStudy] = useState<Dayjs>(dayjs(new Date()));
-  const [isWeeklyOrBiweekly, setIsWeeklyOrBiweekly] = useState<StudyWeekType>('weekly');
+  const [studyFrequency, setStudyFrequency] = useState<StudyWeekType>('weekly');
   const [isDayClicked, setIsDayClicked] = useState('');
 
   const {
@@ -91,22 +91,22 @@ const Create = () => {
     }
     console.log('valid', data);
   };
-  const onSubmitInvalid = (formErrors: FieldErrors) => {
-    console.log(formErrors);
-  };
+
+  const isPreviousDay = (date: Dayjs) => dayjs(new Date()).isAfter(date);
 
   const changeStartDayOfStudy = (date: string) => {
     const selectedDate = dayjs(new Date(date));
-    const today = dayjs(new Date());
-    if (today.isAfter(selectedDate)) {
+
+    if (isPreviousDay(selectedDate)) {
       alert('오늘보다 이전 날짜는 선택하실 수 없습니다.');
       return;
     }
 
     setStartDayOfStudy(dayjs(new Date(date)));
   };
-  const onClickWeeklyOrBiweekly = (newWeekly: StudyWeekType) => {
-    setIsWeeklyOrBiweekly(newWeekly);
+
+  const selectFrequencyOfMonth = (selectedFrequency: StudyWeekType) => {
+    setStudyFrequency(selectedFrequency);
   };
 
   return (
@@ -115,7 +115,7 @@ const Create = () => {
       canGoBack
     >
       <PageContainer>
-        <Form onSubmit={handleSubmit(onSubmitValid, onSubmitInvalid)}>
+        <Form onSubmit={handleSubmit(onSubmitValid)}>
           <Input
             type='text'
             placeholder='스터디이름을 입력하세요'
@@ -157,13 +157,13 @@ const Create = () => {
             <ItemsCenter>
               <Button
                 content='매주'
-                onClick={() => onClickWeeklyOrBiweekly('weekly')}
-                primary={isWeeklyOrBiweekly === 'weekly'}
+                onClick={() => selectFrequencyOfMonth('weekly')}
+                primary={studyFrequency === 'weekly'}
               />
               <Button
                 content='격주'
-                onClick={() => onClickWeeklyOrBiweekly('biweekly')}
-                primary={isWeeklyOrBiweekly === 'biweekly'}
+                onClick={() => selectFrequencyOfMonth('biweekly')}
+                primary={studyFrequency === 'biweekly'}
               />
             </ItemsCenter>
             <ItemsCenter>
@@ -211,7 +211,7 @@ const Create = () => {
           <Button
             primary
             content='저장'
-            onClick={handleSubmit(onSubmitValid, onSubmitInvalid)}
+            onClick={handleSubmit(onSubmitValid)}
           />
         </SubmitButtonWrapper>
       </PageContainer>
