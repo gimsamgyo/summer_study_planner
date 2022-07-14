@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 const DayButtonStyle = styled.button<{ isFilled: boolean }>`
-  padding: 0.5rem;
+  height: 2.5rem;
+  width: 2.5rem;
   border: 1px solid coral;
   color: ${({ isFilled }) => (isFilled ? 'whitesmoke' : 'coral')};
   font-weight: 600;

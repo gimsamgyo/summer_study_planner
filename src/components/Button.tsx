@@ -10,6 +10,7 @@ const ButtonStyle = styled.button<IButtonStyle>`
   border: 1px solid coral;
   border-radius: 8px;
   padding: 0.2rem 1rem;
+  font-size: 1rem;
 `;
 
 const Button = ({ primary, onClick, content }: IButton) => (

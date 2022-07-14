@@ -6,10 +6,10 @@ import { PageContainer } from '@/CommonStyles';
 import FloatingButton from '@/components/FloatingButton';
 import FloatingOpenMenuButton from '@/components/FloatingButton/FloatingOpenMenuButton';
 import Layout from '@/components/Layout';
+import StudyListItem from '@/components/StudyListItem';
 import useStack from '@/hooks/useStack';
 
 const Contents = styled.div`
-  overflow-y: scroll;
   padding: 0.5rem;
   height: 100%;
 
@@ -55,7 +55,11 @@ const Main = () => {
   return (
     <Layout title='스터디 목록'>
       <PageContainer onClick={closeFloatingMenu}>
-        <Contents />
+        <Contents>
+          {[1, 2, 3, 4, 5, 6, 7, 8].map((studyItem) => (
+            <StudyListItem key={studyItem} />
+          ))}
+        </Contents>
         <FloatingOpenMenuButton
           content='M'
           primary

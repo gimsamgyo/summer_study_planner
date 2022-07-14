@@ -20,7 +20,7 @@ interface TextAreaProps {
   errorMessage?: string;
   label?: string;
   name?: string;
-  required: boolean;
+  required?: boolean;
   [key: string]: any;
 }
 const TextArea = ({

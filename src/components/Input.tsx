@@ -21,7 +21,7 @@ interface InputProps {
   errorMessage?: string;
   label?: string;
   name?: string;
-  required: boolean;
+  required?: boolean;
 }
 const Input = ({
   type,
