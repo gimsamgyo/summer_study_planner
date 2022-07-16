@@ -5,11 +5,11 @@ import { STUDY_LIST_ITEM } from '@/test/studyList';
 function useSearch() {
   const [keyword, setKeyword] = useState<string>('');
 
-  const searchedList = useMemo(
+  const searchResults = useMemo(
     () => [STUDY_LIST_ITEM].filter((v) => v.title.includes(keyword)),
     [keyword],
   );
-  return { keyword, setKeyword, searchedList };
+  return { keyword, setKeyword, searchResults };
 }
 
 export default useSearch;

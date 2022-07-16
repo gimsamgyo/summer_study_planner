@@ -44,7 +44,7 @@ const FloatMenus = styled.div`
 
 const Main = () => {
   const { push } = useStack();
-  const { keyword, setKeyword, searchedList } = useSearch();
+  const { keyword, setKeyword, searchResults } = useSearch();
   const [floatingMenuOpen, setFloatingMenuOpen] = useState(false);
 
   const goCreatePage = () => push('/create');
@@ -63,7 +63,7 @@ const Main = () => {
       />
       <PageContainer onClick={closeFloatingMenu}>
         <Contents>
-          {searchedList.map((studyItem) => (
+          {searchResults.map((studyItem) => (
             <StudyListItem {...studyItem} />
           ))}
         </Contents>
