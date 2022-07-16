@@ -22,6 +22,7 @@ interface InputProps {
   label?: string;
   name?: string;
   required?: boolean;
+  maxLength?: number;
 }
 const Input = ({
   type,
@@ -31,6 +32,7 @@ const Input = ({
   errorMessage,
   label,
   name,
+  maxLength,
 }: InputProps) => (
   <div>
     {name && label && <Label htmlFor={name}>{label}</Label>}
@@ -40,6 +42,7 @@ const Input = ({
         type={type}
         placeholder={placeholder}
         required={required}
+        maxLength={maxLength}
         {...register}
       />
       {!!errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
