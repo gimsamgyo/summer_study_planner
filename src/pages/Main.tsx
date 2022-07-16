@@ -6,7 +6,9 @@ import { PageContainer } from '@/CommonStyles';
 import FloatingButton from '@/components/FloatingButton';
 import FloatingOpenMenuButton from '@/components/FloatingButton/FloatingOpenMenuButton';
 import Layout from '@/components/Layout';
+import SearchBar from '@/components/SearchBar';
 import StudyListItem from '@/components/StudyListItem';
+import useSearch from '@/hooks/useSearch';
 import useStack from '@/hooks/useStack';
 
 const Contents = styled.div`
@@ -42,6 +44,7 @@ const FloatMenus = styled.div`
 
 const Main = () => {
   const { push } = useStack();
+  const { keyword, setKeyword, searchResults } = useSearch();
   const [floatingMenuOpen, setFloatingMenuOpen] = useState(false);
 
   const goCreatePage = () => push('/create');
@@ -54,10 +57,14 @@ const Main = () => {
 
   return (
     <Layout title='스터디 목록'>
+      <SearchBar
+        keyword={keyword}
+        setKeyword={setKeyword}
+      />
       <PageContainer onClick={closeFloatingMenu}>
         <Contents>
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((studyItem) => (
-            <StudyListItem key={studyItem} />
+          {searchResults.map((studyItem) => (
+            <StudyListItem {...studyItem} />
           ))}
         </Contents>
         <FloatingOpenMenuButton

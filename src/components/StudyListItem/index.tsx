@@ -41,20 +41,28 @@ const MoneyText = styled.span`
   padding: 0 0.5rem;
 `;
 
-export default function StudyListItem() {
+interface Props {
+  title: string;
+  term: string;
+  period: string;
+  place: string;
+  lateFee: string;
+}
+
+export default function StudyListItem({ title, term, period, place, lateFee }: Props) {
   return (
     <Container>
       <StudyTitleWrapper>
-        <StudyTitle>스터디 타이틀</StudyTitle>
+        <StudyTitle>{title}</StudyTitle>
       </StudyTitleWrapper>
       <StudyInformationWrapper>
         <StudyDetailInfo>
-          <p>2022/07/22 ~ 2022/11/07</p>
-          <p>매주 월,수,금</p>
-          <p>장소: Google Meet</p>
+          <p>{term}</p>
+          <p>{period}</p>
+          <p>{place}</p>
           <p>
             지각비:
-            <MoneyText>1,000원</MoneyText>
+            <MoneyText>{lateFee}</MoneyText>
           </p>
         </StudyDetailInfo>
         <StudyJoinWrapper>
