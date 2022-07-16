@@ -1,3 +1,4 @@
+import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 
 import Input from './Input';
@@ -13,6 +14,7 @@ const Container = styled.div`
   justify-content: space-between;
   & > div:nth-of-type(2) {
     width: 90%;
+    text-align: left;
   }
 `;
 const TitleWrapper = styled.div`
@@ -45,9 +47,18 @@ const EnterButton = styled(Button)`
 interface ModalProps {
   onClose: () => void;
 }
+
+interface EnterStudyCodeType {
+  enterCode: string;
+}
 export default function EnterStudyModalContent({ onClose }: ModalProps) {
-  const submitCode = () => {
-    console.log('submit code');
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<EnterStudyCodeType>();
+  const submitCode = (data: EnterStudyCodeType) => {
+    console.log('submit code', data.enterCode);
   };
   return (
     <Container>
@@ -59,6 +70,19 @@ export default function EnterStudyModalContent({ onClose }: ModalProps) {
         type='text'
         name='enter-code'
         required
+        register={register('enterCode', {
+          required: '입장 코드를 입력해주세요',
+          maxLength: {
+            value: 6,
+            message: '입장 코드는 6글자입니다.',
+          },
+          minLength: {
+            value: 6,
+            message: '입장 코드는 6글자입니다.',
+          },
+        })}
+        maxLength={6}
+        errorMessage={errors?.enterCode?.message}
       />
       <ButtonWrapper>
         <CloseButton
@@ -69,7 +93,7 @@ export default function EnterStudyModalContent({ onClose }: ModalProps) {
         </CloseButton>
         <EnterButton
           type='button'
-          onClick={submitCode}
+          onClick={handleSubmit(submitCode)}
         >
           입장
         </EnterButton>
